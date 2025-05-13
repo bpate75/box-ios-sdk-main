@@ -72,7 +72,9 @@ public enum ResponseHandler {
     public static func `default`(wrapping completion: @escaping Callback<Void>) -> Callback<BoxResponse> {
         return { (result: Result<BoxResponse, BoxSDKError>) in
             let objectResult = result.map { _ in }
-            completion(objectResult)
+            DispatchQueue.main.async {
+                completion(objectResult)
+            }
         }
     }
 
